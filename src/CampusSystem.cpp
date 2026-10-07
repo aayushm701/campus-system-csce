@@ -399,6 +399,10 @@ void CampusSystem::generateReport() const {
     for (const auto& entry : waitingLists) {
         if (!entry.second.empty()) cout << entry.first << ": " << entry.second.size() << " waiting\n";
     }
+    reportActiveReservations();
+    reportResourceUtilization();
+    reportMostRequestedResource();
+    reportWaitingListStatistics();
 }
 
 CampusSystem::CampusSystem() {
