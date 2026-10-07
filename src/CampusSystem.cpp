@@ -330,6 +330,22 @@ void CampusSystem::reportActiveReservations() const {
              << " | Resource: " << reservation.resourceId
              << " | Date: " << reservation.date << '\n';
     }
+    void CampusSystem::reportResourceUtilization() const {
+    cout << "\n=== Resource Utilization ===\n";
+
+    if (resources.empty()) {
+        cout << "No resources available.\n";
+        return;
+    }
+
+    for (const Resource& resource : resources) {
+        cout << resource.id
+             << " | " << resource.name
+             << " | Reservations: " << resource.reservationCount
+             << " | Status: "
+             << (resource.available ? "Available" : "Reserved")
+             << '\n';
+    }
 }
 void CampusSystem::generateReport() const {
     // Sort a copy so the original resource order is not changed by a report.
