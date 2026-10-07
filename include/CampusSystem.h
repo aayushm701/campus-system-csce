@@ -43,6 +43,7 @@ private:
     void searchReservations();
     void searchResource();
     void viewWaitingLists() const;
+    void reportActiveReservations() const;
     void generateReport() const;
 
 public:
