@@ -102,6 +102,9 @@ bool CampusSystem::compareResources(const Resource& left, const Resource& right)
     return left.name < right.name;
 }
 
+bool CampusSystem::compareResourcePopularity(const Resource& left, const Resource& right) {
+    return left.reservationCount > right.reservationCount;
+}
 // Merge sort gives predictable O(n log n) ordering for resource reports.
 void CampusSystem::mergeSort(vector<Resource>& values, int first, int last) {
     if (first >= last) return;
