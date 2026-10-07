@@ -347,6 +347,27 @@ void CampusSystem::reportActiveReservations() const {
              << '\n';
     }
 }
+    void CampusSystem::reportMostRequestedResource() const {
+    cout << "\n=== Most Requested Resource ===\n";
+
+    if (resources.empty()) {
+        cout << "No resources available.\n";
+        return;
+    }
+
+    const Resource* mostRequested = &resources[0];
+
+    for (const Resource& resource : resources) {
+        if (resource.reservationCount > mostRequested->reservationCount) {
+            mostRequested = &resource;
+        }
+    }
+
+    cout << "Resource: " << mostRequested->id
+         << " | " << mostRequested->name
+         << " | Reservations: " << mostRequested->reservationCount
+         << '\n';    
+}
 void CampusSystem::generateReport() const {
     // Sort a copy so the original resource order is not changed by a report.
     vector<Resource> sorted = resources;
