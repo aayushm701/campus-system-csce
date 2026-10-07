@@ -212,7 +212,24 @@ void CampusSystem::searchReservations() {
     }
     if (!found) cout << "No matching reservations found.\n";
 }
+void CampusSystem::searchResource() {
+    string id = readText("Enter resource ID: ");
 
+    Resource* resource = findResource(id);
+
+    if (resource != nullptr) {
+        cout << "\nResource Found:\n";
+        cout << left << setw(8) << "ID"
+             << setw(26) << "Name"
+             << setw(18) << "Type"
+             << "Status\n";
+
+        displayResource(*resource);
+    }
+    else {
+        cout << "Resource not found.\n";
+    }
+}
 void CampusSystem::viewWaitingLists() const {
     bool found = false;
     for (const auto& entry : waitingLists) {
