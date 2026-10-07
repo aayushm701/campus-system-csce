@@ -346,12 +346,38 @@ void CampusSystem::run() {
                 break;
             }
             
-            case 7:
-                if (!resources.empty())
-                    mergeSort(resources, 0, static_cast<int>(resources.size()) - 1);
+            case 7: {
+                cout << "\n===== Sort Menu =====\n";
+                cout << "1. Sort Resources by Name\n";
+                cout << "2. Sort Resources by Popularity\n";
+                cout << "3. Back\n";
             
-                cout << "Resources sorted by name.\n";
+                int sortChoice;
+            
+                if (!readInt("Enter Choice: ", sortChoice))
+                    break;
+            
+                if (sortChoice == 1) {
+                    if (!resources.empty()) {
+                        mergeSort(resources, 0, static_cast<int>(resources.size()) - 1);
+                    }
+                    cout << "Resources sorted by name.\n";
+                }
+                else if (sortChoice == 2) {
+                    if (!resources.empty()) {
+                        mergeSortByPopularity(resources, 0, static_cast<int>(resources.size()) - 1);
+                    }
+                    cout << "Resources sorted by popularity.\n";
+                }
+                else if (sortChoice == 3) {
+                    break;
+                }
+                else {
+                    cout << "Invalid sort option.\n";
+                }
+            
                 break;
+            }
             case 8: generateReport(); break;
             case 9: cout << "Goodbye.\n"; return;
             default: cout << "Please select a menu option from 1 to 9.\n";
