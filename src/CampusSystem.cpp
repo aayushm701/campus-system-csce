@@ -309,7 +309,8 @@ void CampusSystem::viewWaitingLists() const {
         }
     }
     if (!found) cout << "No students are currently waiting.\n";
-}
+    
+    }
 void CampusSystem::reportActiveReservations() const {
     vector<Reservation> activeReservations = reservations.toVector();
 
@@ -330,6 +331,7 @@ void CampusSystem::reportActiveReservations() const {
              << " | Resource: " << reservation.resourceId
              << " | Date: " << reservation.date << '\n';
     }
+}
     void CampusSystem::reportResourceUtilization() const {
     cout << "\n=== Resource Utilization ===\n";
 
