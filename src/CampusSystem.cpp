@@ -270,7 +270,7 @@ void CampusSystem::run() {
     cout << "===== Campus Resource Reservation System =====\n";
     while (true) {
         cout << "\n1. View Resources\n2. Create Reservation\n3. Cancel Reservation\n"
-                "4. View Waiting Lists\n5. Undo Cancellation\n6. Search Reservations\n"
+                "4. View Waiting Lists\n5. Undo Cancellation\n6. Search\n"
                 "7. Sort Resources\n8. Generate Report\n9. Exit\n";
         int choice;
         if (!readInt("Enter Choice: ", choice)) continue;
@@ -284,9 +284,38 @@ void CampusSystem::run() {
             case 3: cancelReservation(); break;
             case 4: viewWaitingLists(); break;
             case 5: undoCancellation(); break;
-            case 6: searchReservations(); break;
+            
+            case 6: {
+                cout << "\n===== Search Menu =====\n";
+                cout << "1. Search Resource by ID\n";
+                cout << "2. Search Reservation or Student ID\n";
+                cout << "3. Back\n";
+            
+                int searchChoice;
+            
+                if (!readInt("Enter Choice: ", searchChoice))
+                    break;
+            
+                if (searchChoice == 1) {
+                    searchResource();
+                }
+                else if (searchChoice == 2) {
+                    searchReservations();
+                }
+                else if (searchChoice == 3) {
+                    break;
+                }
+                else {
+                    cout << "Invalid search option.\n";
+                }
+            
+                break;
+            }
+            
             case 7:
-                if (!resources.empty()) mergeSort(resources, 0, static_cast<int>(resources.size()) - 1);
+                if (!resources.empty())
+                    mergeSort(resources, 0, static_cast<int>(resources.size()) - 1);
+            
                 cout << "Resources sorted by name.\n";
                 break;
             case 8: generateReport(); break;
