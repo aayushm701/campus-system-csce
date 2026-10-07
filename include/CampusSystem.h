@@ -46,6 +46,7 @@ private:
     void reportActiveReservations() const;
     void reportResourceUtilization() const;
     void reportMostRequestedResource() const;
+    void reportWaitingListStatistics() const;
     void generateReport() const;
 
 public:
