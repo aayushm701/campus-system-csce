@@ -122,7 +122,38 @@ void CampusSystem::mergeSort(vector<Resource>& values, int first, int last) {
     while (right <= last) merged.push_back(values[right++]);
     copy(merged.begin(), merged.end(), values.begin() + first);
 }
+void CampusSystem::mergeSortByPopularity(vector<Resource>& values, int first, int last) {
+    if (first >= last) return;
 
+    int middle = first + (last - first) / 2;
+
+    mergeSortByPopularity(values, first, middle);
+    mergeSortByPopularity(values, middle + 1, last);
+
+    vector<Resource> merged;
+
+    int left = first;
+    int right = middle + 1;
+
+    while (left <= middle && right <= last) {
+        if (compareResourcePopularity(values[left], values[right])) {
+            merged.push_back(values[left++]);
+        }
+        else {
+            merged.push_back(values[right++]);
+        }
+    }
+
+    while (left <= middle) {
+        merged.push_back(values[left++]);
+    }
+
+    while (right <= last) {
+        merged.push_back(values[right++]);
+    }
+
+    copy(merged.begin(), merged.end(), values.begin() + first);
+}
 void CampusSystem::displayResource(const Resource& resource) const {
     cout << left << setw(8) << resource.id << setw(26) << resource.name
          << setw(18) << resource.type << (resource.available ? "Available" : "Reserved") << '\n';
