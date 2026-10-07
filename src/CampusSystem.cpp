@@ -500,7 +500,44 @@ void CampusSystem::run() {
                 else if (sortChoice == 4) {
                     break;
                 }
-            case 8: generateReport(); break;
+            case 8: {
+                cout << "\n===== Report Menu =====\n";
+                cout << "1. Active Reservations\n";
+                cout << "2. Resource Utilization\n";
+                cout << "3. Most Requested Resource\n";
+                cout << "4. Waiting List Statistics\n";
+                cout << "5. Full Report\n";
+                cout << "6. Back\n";
+            
+                int reportChoice;
+            
+                if (!readInt("Enter Choice: ", reportChoice))
+                    break;
+            
+                if (reportChoice == 1) {
+                    reportActiveReservations();
+                }
+                else if (reportChoice == 2) {
+                    reportResourceUtilization();
+                }
+                else if (reportChoice == 3) {
+                    reportMostRequestedResource();
+                }
+                else if (reportChoice == 4) {
+                    reportWaitingListStatistics();
+                }
+                else if (reportChoice == 5) {
+                    generateReport();
+                }
+                else if (reportChoice == 6) {
+                    break;
+                }
+                else {
+                    cout << "Invalid report option.\n";
+                }
+            
+                break;
+            }
             case 9: cout << "Goodbye.\n"; return;
             default: cout << "Please select a menu option from 1 to 9.\n";
         }
