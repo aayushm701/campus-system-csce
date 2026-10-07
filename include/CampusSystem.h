@@ -33,6 +33,7 @@ private:
     static bool compareResources(const Resource& left, const Resource& right);
     static bool compareResourcePopularity(const Resource& left, const Resource& right);
     static void mergeSort(std::vector<Resource>& values, int first, int last);
+    static void mergeSortByPopularity(std::vector<Resource>& values, int first, int last);
     void displayResource(const Resource& resource) const;
     void createReservation();
     void cancelReservation();
