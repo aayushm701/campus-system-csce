@@ -154,6 +154,38 @@ void CampusSystem::mergeSortByPopularity(vector<Resource>& values, int first, in
 
     copy(merged.begin(), merged.end(), values.begin() + first);
 }
+void CampusSystem::mergeSortReservationsByDate(vector<Reservation>& values, int first, int last) {
+    if (first >= last) return;
+
+    int middle = first + (last - first) / 2;
+
+    mergeSortReservationsByDate(values, first, middle);
+    mergeSortReservationsByDate(values, middle + 1, last);
+
+    vector<Reservation> merged;
+
+    int left = first;
+    int right = middle + 1;
+
+    while (left <= middle && right <= last) {
+        if (values[left].date < values[right].date) {
+            merged.push_back(values[left++]);
+        }
+        else {
+            merged.push_back(values[right++]);
+        }
+    }
+
+    while (left <= middle) {
+        merged.push_back(values[left++]);
+    }
+
+    while (right <= last) {
+        merged.push_back(values[right++]);
+    }
+
+    copy(merged.begin(), merged.end(), values.begin() + first);
+}
 void CampusSystem::displayResource(const Resource& resource) const {
     cout << left << setw(8) << resource.id << setw(26) << resource.name
          << setw(18) << resource.type << (resource.available ? "Available" : "Reserved") << '\n';
@@ -350,7 +382,8 @@ void CampusSystem::run() {
                 cout << "\n===== Sort Menu =====\n";
                 cout << "1. Sort Resources by Name\n";
                 cout << "2. Sort Resources by Popularity\n";
-                cout << "3. Back\n";
+                cout << "3. Sort Reservations by Date\n";
+                cout << "4. Back\n";
             
                 int sortChoice;
             
@@ -370,14 +403,28 @@ void CampusSystem::run() {
                     cout << "Resources sorted by popularity.\n";
                 }
                 else if (sortChoice == 3) {
+                    vector<Reservation> sortedReservations = reservations.toVector();
+                
+                    if (!sortedReservations.empty()) {
+                        mergeSortReservationsByDate(
+                            sortedReservations,
+                            0,
+                            static_cast<int>(sortedReservations.size()) - 1
+                        );
+                    }
+                
+                    cout << "\nReservations sorted by date:\n";
+                
+                    for (const Reservation& reservation : sortedReservations) {
+                        cout << "ID: " << reservation.id
+                             << " | Student: " << reservation.studentName
+                             << " | Resource: " << reservation.resourceId
+                             << " | Date: " << reservation.date << '\n';
+                    }
+                }
+                else if (sortChoice == 4) {
                     break;
                 }
-                else {
-                    cout << "Invalid sort option.\n";
-                }
-            
-                break;
-            }
             case 8: generateReport(); break;
             case 9: cout << "Goodbye.\n"; return;
             default: cout << "Please select a menu option from 1 to 9.\n";
