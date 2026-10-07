@@ -38,6 +38,7 @@ private:
     void assignNextWaiting(const std::string& resourceId);
     void undoCancellation();
     void searchReservations();
+    void searchResource();
     void viewWaitingLists() const;
     void generateReport() const;
 
