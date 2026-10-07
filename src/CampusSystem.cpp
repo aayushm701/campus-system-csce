@@ -347,6 +347,24 @@ void CampusSystem::reportActiveReservations() const {
              << '\n';
     }
 }
+    void CampusSystem::reportWaitingListStatistics() const {
+    cout << "\n=== Waiting List Statistics ===\n";
+
+    int totalWaiting = 0;
+
+    for (const auto& entry : waitingLists) {
+        int count = entry.second.size();
+
+        if (count > 0) {
+            cout << "Resource: " << entry.first
+                 << " | Students Waiting: " << count << '\n';
+
+            totalWaiting += count;
+        }
+    }
+
+    cout << "Total students waiting: " << totalWaiting << '\n';
+}
     void CampusSystem::reportMostRequestedResource() const {
     cout << "\n=== Most Requested Resource ===\n";
 
