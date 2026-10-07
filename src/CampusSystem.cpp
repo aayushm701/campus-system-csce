@@ -310,7 +310,27 @@ void CampusSystem::viewWaitingLists() const {
     }
     if (!found) cout << "No students are currently waiting.\n";
 }
+void CampusSystem::reportActiveReservations() const {
+    vector<Reservation> activeReservations = reservations.toVector();
 
+    cout << "\n=== Active Reservations ===\n";
+
+    if (activeReservations.empty()) {
+        cout << "No active reservations.\n";
+        return;
+    }
+
+    cout << "Total active reservations: "
+         << activeReservations.size() << '\n';
+
+    for (const Reservation& reservation : activeReservations) {
+        cout << "ID: " << reservation.id
+             << " | Student: " << reservation.studentName
+             << " (" << reservation.studentId << ")"
+             << " | Resource: " << reservation.resourceId
+             << " | Date: " << reservation.date << '\n';
+    }
+}
 void CampusSystem::generateReport() const {
     // Sort a copy so the original resource order is not changed by a report.
     vector<Resource> sorted = resources;
